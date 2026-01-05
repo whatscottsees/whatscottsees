@@ -1,0 +1,38 @@
+---
+const {
+  title = "Gallery",
+  metaLines = [],
+  featured = [],
+  images = [],
+} = Astro.props;
+---
+
+<section class="gallery-wrap">
+  <div class="gallery-title">{title}</div>
+
+  {metaLines.length > 0 && (
+    <div class="gallery-meta">
+      {metaLines.map((line) => (
+        <div>{line}</div>
+      ))}
+    </div>
+  )}
+
+  {featured.length > 0 && (
+    <div class="featured">
+      {featured.slice(0, 2).map((img) => (
+        <a href={img.src}>
+          <img src={img.src} alt={img.alt ?? ""} loading="lazy" />
+        </a>
+      ))}
+    </div>
+  )}
+
+  <div class="masonry">
+    {images.map((img) => (
+      <a href={img.src}>
+        <img src={img.src} alt={img.alt ?? ""} loading="lazy" />
+      </a>
+    ))}
+  </div>
+</section>

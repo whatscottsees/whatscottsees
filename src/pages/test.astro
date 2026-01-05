@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Gallery from "../components/Gallery.astro";
+
+const title = "Test Gallery | WhatScottSees";
+---
+
+<BaseLayout title={title}>
+  <h1>WhatScottSees</h1>
+
+  <p>
+    WhatScottSees is an ongoing photography project and archive rooted in analog image-making.
+  </p>
+
+  <p>
+    The work is made primarily on film and spans images produced across Scotland and elsewhere,
+    shaped by movement, travel, and attention to specific places, events, and encounters.
+    Rather than following a single subject, the project develops through accumulation —
+    photographs made at different times and under varying conditions, connected by a consistent
+    way of seeing.
+  </p>
+
+  <p>
+    Alongside photography, the archive may include sound recordings, notes, and fragments
+    gathered in the same moments as the images themselves. These materials sit together as
+    traces of where the work was made and how it was experienced.
+  </p>
+
+  <p>
+    Collections within WhatScottSees are not fixed endpoints, but temporary groupings — a way
+    of holding related work together while allowing the archive to remain open, unfinished,
+    and subject to change over time.
+  </p>
+
+  <Gallery
+    title="Test Gallery"
+    metaLines={[
+      "Animals — Bronica ETRSi — Kodak Gold",
+      "Plants, Butterfly (Dad) — Olympus OM-2 — Cinemot Lisboa",
+    ]}
+    featured={[
+      { src: "/images/test/1.jpg" },
+      { src: "/images/test/2.jpg" },
+    ]}
+    images={[
+      { src: "/images/test/3.jpg" },
+      { src: "/images/test/4.jpg" },
+      { src: "/images/test/5.jpg" },
+      { src: "/images/test/6.jpg" },
+      { src: "/images/test/7.jpg" },
+      { src: "/images/test/8.jpg" },
+    ]}
+  />
+</BaseLayout>
