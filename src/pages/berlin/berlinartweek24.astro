@@ -26,8 +26,10 @@ const title = "Berlin Art Week 2024 | WhatScottSees";
       muted
       loop
       playsinline
+      preload="auto"
     >
-<source src="/berlinAW1.mp4" type="video/mp4">
+      <!-- 🔥 IMPORTANT: MATCH YOUR ACTUAL FILE -->
+      <source src="/media/berlin/berlinartweek24/Berlinaw1.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -113,34 +115,41 @@ const title = "Berlin Art Week 2024 | WhatScottSees";
   <script is:inline>
     const video = document.getElementById('heroVideo');
 
-    // Force autoplay (muted is required)
-    video.muted = true;
+    if (video) {
+      // Always start muted (required for autoplay)
+      video.muted = true;
 
-    const tryPlay = () => {
-      const promise = video.play();
-      if (promise !== undefined) {
-        promise.catch(() => {
-          // fallback: wait for interaction
-          document.addEventListener('click', () => {
-            video.play();
-          }, { once: true });
-        });
-      }
-    };
+      const attemptPlay = () => {
+        const playPromise = video.play();
 
-    // Try immediately
-    tryPlay();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // fallback: user interaction
+            document.addEventListener('click', () => {
+              video.play();
+            }, { once: true });
+          });
+        }
+      };
 
-    // Also try once fully loaded (important for some browsers)
-    video.addEventListener('loadeddata', tryPlay);
+      // Try immediately
+      attemptPlay();
 
-    // Attempt sound (will only work where allowed)
-    video.addEventListener('playing', () => {
-      try {
-        video.volume = 0.1;
-        video.muted = false;
-      } catch {}
-    });
+      // Try again when ready
+      video.addEventListener('loadeddata', attemptPlay);
+
+      // Try enabling sound AFTER playback starts
+      video.addEventListener('playing', () => {
+        try {
+          video.volume = 0.1;
+
+          // ⚠️ Only unmute if browser allows
+          setTimeout(() => {
+            video.muted = false;
+          }, 500);
+        } catch {}
+      });
+    }
   </script>
 
 </BaseLayout>
