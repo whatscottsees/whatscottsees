@@ -1,0 +1,160 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Gallery from "../../components/Gallery.astro";
+
+const title = "Berlin Art Week 2024 | WhatScottSees";
+---
+
+<BaseLayout title={title}>
+  <h1>Berlin Art Week 2024</h1>
+
+  <p>
+    A series of 35mm studies made during Berlin Art Week, moving between
+    performance, installation, and the surrounding environments.
+  </p>
+
+  <p>
+    The images presented here were made across different events during the week,
+    beginning with work encountered at MaHalla.
+  </p>
+
+  <!-- VIDEO -->
+  <div class="video-wrap">
+    <video controls muted loop playsinline>
+      <source src="/media/berlin/berlinartweek24/berlinAW1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- EVENT CONTEXT -->
+  <section class="event">
+    <h2>MY BODY IS_ — MaHalla</h2>
+
+    <div class="event-meta">
+      <div>MaHalla, Berlin</div>
+      <div>Berlin Art Week — 11–15 September 2024</div>
+      <div>Performance / Installation / Durational</div>
+    </div>
+
+    <p class="event-text">
+      MY BODY IS_ is an exhibition, installation, and performance series exploring
+      transformation and the construction of creature-hood through the migrant body.
+    </p>
+
+    <p class="event-text">
+      Presented as part of MaHalla Open during Berlin Art Week 2024, the work unfolded
+      across multiple performances and installations, including BOUZUQEE, BREATHING
+      BETWEEN, WATER, NATURGEWALT, and UNCONTAINED.
+    </p>
+
+    <p class="event-text">
+      The images move through these fragments — moments of performance, gesture,
+      and environment — reflecting how the work was encountered rather than
+      documenting a single fixed sequence.
+    </p>
+  </section>
+
+  <!-- ANALOG GALLERY -->
+  <Gallery
+    title="MY BODY IS_ — MaHalla"
+    metaLines={[
+      "Berlin — 35mm Film",
+      "MaHalla — Performance / Installation",
+    ]}
+    featured={[
+      { src: "/images/berlin/berlinartweek24/01.jpg" },
+      { src: "/images/berlin/berlinartweek24/02.jpg" },
+    ]}
+    images={[
+      { src: "/images/berlin/berlinartweek24/03.jpg" },
+      { src: "/images/berlin/berlinartweek24/04.jpg" },
+      { src: "/images/berlin/berlinartweek24/05.jpg" },
+      { src: "/images/berlin/berlinartweek24/06.jpg" },
+      { src: "/images/berlin/berlinartweek24/07.jpg" },
+      { src: "/images/berlin/berlinartweek24/08.jpg" },
+      { src: "/images/berlin/berlinartweek24/09.jpg" },
+      { src: "/images/berlin/berlinartweek24/10.jpg" },
+      { src: "/images/berlin/berlinartweek24/11.jpg" },
+    ]}
+  />
+
+  <!-- DIGITAL SECTION -->
+  <section class="event">
+    <h2>Digital</h2>
+
+    <div class="event-meta">
+      <div>Olympus OM-D</div>
+      <div>Berlin Art Week 2024</div>
+    </div>
+
+    <p class="event-text">
+      A parallel set of digital observations made across the same period,
+      moving between performances, installations, and the surrounding city.
+    </p>
+  </section>
+
+  <!-- DIGITAL GALLERY -->
+  <Gallery
+    title="OM-D"
+    folder="berlin/berlinartweek24/digital"
+  />
+
+  <!-- INFO LINK -->
+  <p class="info-link">
+    <a href="/berlin/berlinartweek24/info">More information →</a>
+  </p>
+
+</BaseLayout>
+
+<style>
+.video-wrap {
+  margin-top: 40px;
+}
+
+.video-wrap video {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.event {
+  margin-top: 80px;
+}
+
+.event h2 {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.event-meta {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.event-meta div {
+  margin-bottom: 4px;
+}
+
+.event-text {
+  max-width: 650px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.info-link {
+  margin-top: 60px;
+}
+
+.info-link a {
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.info-link a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+</style>

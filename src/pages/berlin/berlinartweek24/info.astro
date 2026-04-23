@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const title = "Berlin Art Week 2024 — Info | WhatScottSees";
+---
+
+<BaseLayout title={title}>
+  <h1>Berlin Art Week 2024</h1>
+
+  <p>
+    Documentation of work encountered at MaHalla as part of Berlin Art Week 2024.
+  </p>
+
+  <hr />
+
+  <h2>MY BODY IS_</h2>
+
+  <p class="quote">
+    “MY BODY IS_ is an exhibition + installation + performance series that looks at
+    transformation and the construction of creature-hood through the migrant body.”
+  </p>
+
+  <p>
+    Curated by Harshini J. Karunaratne as part of MaHalla Open,
+    a multi-day programme of performance, installation, and durational work.
+  </p>
+
+  <hr />
+
+  <h2>Artists & Contributors</h2>
+
+  <ul class="list">
+    <li>Harshini J. Karunaratne</li>
+    <li>Kadir Amigo Memiş</li>
+    <li>Ana Barros</li>
+    <li>Geamhraidh Winter</li>
+    <li>Zarahleña</li>
+  </ul>
+
+  <hr />
+
+  <h2>Works</h2>
+
+  <ul class="list">
+    <li>MY BODY IS_ BOUZUQEE</li>
+    <li>MY BODY IS_ BREATHING BETWEEN</li>
+    <li>MY BODY IS_ WATER</li>
+    <li>MY BODY IS_ NATURGEWALT</li>
+    <li>MY BODY IS_ UNCONTAINED</li>
+  </ul>
+
+  <hr />
+
+  <h2>Venue</h2>
+
+  <p>
+    MaHalla is a large-scale industrial venue in Berlin hosting exhibitions,
+    performances, and experimental formats during Berlin Art Week.
+  </p>
+
+</BaseLayout>
+
+<style>
+hr {
+  margin: 60px 0;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.quote {
+  font-size: 14px;
+  opacity: 0.7;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>

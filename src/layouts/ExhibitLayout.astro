@@ -1,0 +1,125 @@
+---
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+</head>
+
+<body>
+
+  <main class="exhibit">
+
+    <!-- INTRO -->
+    <section class="intro">
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </section>
+
+    <!-- CONTENT -->
+    <slot />
+
+  </main>
+
+</body>
+</html>
+
+<style>
+/* RESET FEEL FROM BASE */
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* REMOVE "WEBSITE" FEEL */
+.exhibit {
+  width: 100%;
+}
+
+/* INTRO — OFFSET, NOT CENTERED */
+.intro {
+  padding: 120px 20px 40px;
+  max-width: 700px;
+  margin-left: 10%;
+}
+
+.intro h1 {
+  font-size: 3rem;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.intro p {
+  opacity: 0.6;
+  max-width: 500px;
+}
+
+/* VIDEO — IMMERSIVE */
+.video-hero {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-hero video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(110%) brightness(90%);
+}
+
+/* SECTION BLOCKS */
+.block {
+  padding: 100px 20px;
+  position: relative;
+}
+
+/* SMALL RAW HEADINGS */
+.block h2 {
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  opacity: 0.5;
+  margin-bottom: 20px;
+  transform: translateX(10px);
+}
+
+/* BREAK GRID PERFECTION */
+.gallery {
+  transform: translateX(-10px);
+}
+
+.block:nth-of-type(even) .gallery {
+  transform: translateX(20px);
+}
+
+/* SPACING */
+.spacer {
+  height: 140px;
+}
+
+/* FULL WIDTH INTERRUPT IMAGE */
+.full-image {
+  width: 100%;
+  max-width: 1200px;
+  display: block;
+  margin: auto;
+}
+
+/* GRAIN OVERLAY (SUBTLE TEXTURE) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.08;
+  pointer-events: none;
+}
+</style>
