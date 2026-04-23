@@ -1,9 +1,9 @@
 ---
 /*
   Gallery component
-  - supports featured + masonry (manual mode)
-  - supports auto-loading from folder (new)
-  - includes fullscreen lightbox
+  - manual mode (featured + images)
+  - auto folder mode
+  - fullscreen lightbox (fixed + upgraded)
 */
 
 interface ImageItem {
@@ -61,7 +61,7 @@ const finalImages = folder ? autoImages : images;
     </div>
   )}
 
-  <!-- FEATURED (manual only) -->
+  <!-- FEATURED -->
   {!folder && featured.length > 0 && (
     <div class="featured">
       {featured.map(img => (
@@ -97,19 +97,54 @@ const finalImages = folder ? autoImages : images;
 </div>
 
 <script is:inline>
-  const images = document.querySelectorAll('.gallery-img');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
 
-  images.forEach(img => {
-    img.addEventListener('click', () => {
-      lightbox.classList.remove('hidden');
-      lightboxImg.src = img.src;
-    });
+  let galleryImages = [];
+  let currentIndex = 0;
+
+  // Collect all gallery images
+  function updateImages() {
+    galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
+  }
+
+  updateImages();
+
+  // OPEN (event delegation)
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('.gallery-img');
+    if (!img) return;
+
+    updateImages();
+
+    currentIndex = galleryImages.indexOf(img);
+    lightboxImg.src = img.src;
+    lightbox.classList.remove('hidden');
   });
 
+  // CLOSE
   lightbox.addEventListener('click', () => {
     lightbox.classList.add('hidden');
+  });
+
+  // KEYBOARD NAVIGATION
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+
+    if (e.key === 'Escape') {
+      lightbox.classList.add('hidden');
+    }
+
+    if (e.key === 'ArrowRight') {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      lightboxImg.src = galleryImages[currentIndex].src;
+    }
+
+    if (e.key === 'ArrowLeft') {
+      currentIndex =
+        (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      lightboxImg.src = galleryImages[currentIndex].src;
+    }
   });
 </script>
 
@@ -185,6 +220,11 @@ const finalImages = folder ? autoImages : images;
 .lightbox img {
   max-width: 92%;
   max-height: 92%;
+}
+
+/* CLOSE FEEL */
+.lightbox:hover {
+  cursor: zoom-out;
 }
 
 .hidden {

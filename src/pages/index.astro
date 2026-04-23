@@ -8,33 +8,108 @@ const title = "WhatScottSees";
   <h1>WhatScottSees</h1>
 
   <p>
-    Analog photography. An ongoing project and archive made across Scotland and elsewhere — shaped
-    by movement, place, and moments that don’t repeat.
+    Analog photography. An ongoing project and archive made across Scotland and elsewhere —
+    shaped by movement, place, and moments that don’t repeat.
   </p>
 
-  <section class="home-hero">
+  <!-- HERO IMAGE -->
+  <div class="video-wrap">
     <img
       src="/images/test/1.jpg"
       alt=""
       loading="eager"
     />
+  </div>
+
+  <!-- CONTEXT SECTION (same structure as Berlin) -->
+  <section class="event">
+    <h2>About the Work</h2>
+
+    <div class="event-meta">
+      <div>Glasgow / Scotland / Elsewhere</div>
+      <div>35mm / 120 Film / Experimental Processes</div>
+    </div>
+
+    <p class="event-text">
+      WhatScottSees is an ongoing photographic archive built through movement,
+      observation, and repetition. The work is not tied to a single subject,
+      but instead develops across different places, encounters, and moments in time.
+    </p>
+
+    <p class="event-text">
+      Images are made primarily on film, often in low light or shifting conditions,
+      with an emphasis on atmosphere, gesture, and the feeling of a place rather
+      than strict documentation.
+    </p>
+
+    <p class="event-text">
+      Alongside photography, the project extends into sound, process-based work,
+      and alternative printing methods, forming a wider system of recording and
+      interpreting lived experience.
+    </p>
   </section>
 
-  <style is:global>
-    /* Home-only styling */
-    .home-hero {
-      margin-top: 28px;
-      margin-bottom: 36px;
-    }
+  <!-- ENTRY POINT -->
+  <p class="info-link">
+    <a href="/berlin/berlinartweek24">Berlin Art Week 2024 →</a>
+  </p>
 
-    .home-hero img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 14px;
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-    }
-  </style>
 </BaseLayout>
+
+<style>
+/* MATCH BERLIN STRUCTURE */
+.video-wrap {
+  margin-top: 40px;
+}
+
+.video-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+/* EVENT SECTION */
+.event {
+  margin-top: 80px;
+}
+
+.event h2 {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.event-meta {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.event-meta div {
+  margin-bottom: 4px;
+}
+
+.event-text {
+  max-width: 650px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+/* LINK */
+.info-link {
+  margin-top: 60px;
+}
+
+.info-link a {
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.info-link a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+</style>
