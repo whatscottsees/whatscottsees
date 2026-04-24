@@ -28,7 +28,6 @@ const title = "Berlin Art Week 2024 | WhatScottSees";
       playsinline
       preload="auto"
     >
-      <!-- 🔥 IMPORTANT: MATCH YOUR ACTUAL FILE -->
       <source src="/video.mp4" type="video/mp4">
     </video>
   </div>
@@ -100,10 +99,20 @@ const title = "Berlin Art Week 2024 | WhatScottSees";
     </p>
   </section>
 
-  <!-- DIGITAL GALLERY -->
+  <!-- ✅ FIXED DIGITAL GALLERY (STATIC, RELIABLE) -->
   <Gallery
     title="OM-D"
-    folder="berlin/berlinartweek24/digital"
+    images={[
+      { src: "/images/berlin/berlinartweek24/digital/01.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/02.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/03.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/04.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/05.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/06.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/07.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/08.jpg" },
+      { src: "/images/berlin/berlinartweek24/digital/09.jpg" },
+    ]}
   />
 
   <!-- INFO LINK -->
@@ -111,12 +120,11 @@ const title = "Berlin Art Week 2024 | WhatScottSees";
     <a href="/berlin/berlinartweek24/info">More information →</a>
   </p>
 
-  <!-- VIDEO SCRIPT -->
+  <!-- VIDEO SCRIPT (UNCHANGED) -->
   <script is:inline>
     const video = document.getElementById('heroVideo');
 
     if (video) {
-      // Always start muted (required for autoplay)
       video.muted = true;
 
       const attemptPlay = () => {
@@ -124,7 +132,6 @@ const title = "Berlin Art Week 2024 | WhatScottSees";
 
         if (playPromise !== undefined) {
           playPromise.catch(() => {
-            // fallback: user interaction
             document.addEventListener('click', () => {
               video.play();
             }, { once: true });
@@ -132,18 +139,12 @@ const title = "Berlin Art Week 2024 | WhatScottSees";
         }
       };
 
-      // Try immediately
       attemptPlay();
-
-      // Try again when ready
       video.addEventListener('loadeddata', attemptPlay);
 
-      // Try enabling sound AFTER playback starts
       video.addEventListener('playing', () => {
         try {
           video.volume = 0.1;
-
-          // ⚠️ Only unmute if browser allows
           setTimeout(() => {
             video.muted = false;
           }, 500);

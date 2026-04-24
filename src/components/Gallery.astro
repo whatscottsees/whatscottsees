@@ -3,7 +3,9 @@
   Gallery component
   - manual mode (featured + images)
   - auto folder mode
-  - fullscreen lightbox (fixed + upgraded)
+  - fullscreen lightbox
+  - keyboard navigation
+  - FIXED: no global variable conflicts
 */
 
 interface ImageItem {
@@ -91,61 +93,77 @@ const finalImages = folder ? autoImages : images;
 
 </div>
 
-<!-- LIGHTBOX -->
+<!-- GLOBAL LIGHTBOX (only one needed, but safe even if duplicated) -->
 <div id="lightbox" class="lightbox hidden">
   <img id="lightbox-img" />
 </div>
 
+<!-- SCRIPT (SCOPED — NO GLOBAL COLLISIONS) -->
 <script is:inline>
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
+  (() => {
 
-  let galleryImages = [];
-  let currentIndex = 0;
+    // ELEMENTS
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
 
-  // Collect all gallery images
-  function updateImages() {
-    galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
-  }
+    // STATE
+    let galleryImages = [];
+    let currentIndex = 0;
 
-  updateImages();
-
-  // OPEN (event delegation)
-  document.addEventListener('click', (e) => {
-    const img = e.target.closest('.gallery-img');
-    if (!img) return;
+    // COLLECT IMAGES
+    function updateImages() {
+      galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
+    }
 
     updateImages();
 
-    currentIndex = galleryImages.indexOf(img);
-    lightboxImg.src = img.src;
-    lightbox.classList.remove('hidden');
-  });
+    // OPEN LIGHTBOX (event delegation)
+    document.addEventListener('click', (e) => {
+      const img = e.target.closest('.gallery-img');
+      if (!img) return;
 
-  // CLOSE
-  lightbox.addEventListener('click', () => {
-    lightbox.classList.add('hidden');
-  });
+      updateImages();
 
-  // KEYBOARD NAVIGATION
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.classList.contains('hidden')) return;
+      currentIndex = galleryImages.indexOf(img);
 
-    if (e.key === 'Escape') {
-      lightbox.classList.add('hidden');
+      if (lightbox && lightboxImg) {
+        lightboxImg.src = img.src;
+        lightbox.classList.remove('hidden');
+      }
+    });
+
+    // CLOSE LIGHTBOX
+    if (lightbox) {
+      lightbox.addEventListener('click', () => {
+        lightbox.classList.add('hidden');
+      });
     }
 
-    if (e.key === 'ArrowRight') {
-      currentIndex = (currentIndex + 1) % galleryImages.length;
-      lightboxImg.src = galleryImages[currentIndex].src;
-    }
+    // KEYBOARD NAVIGATION
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox || lightbox.classList.contains('hidden')) return;
 
-    if (e.key === 'ArrowLeft') {
-      currentIndex =
-        (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-      lightboxImg.src = galleryImages[currentIndex].src;
-    }
-  });
+      if (e.key === 'Escape') {
+        lightbox.classList.add('hidden');
+      }
+
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        if (lightboxImg) {
+          lightboxImg.src = galleryImages[currentIndex].src;
+        }
+      }
+
+      if (e.key === 'ArrowLeft') {
+        currentIndex =
+          (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        if (lightboxImg) {
+          lightboxImg.src = galleryImages[currentIndex].src;
+        }
+      }
+    });
+
+  })();
 </script>
 
 <style>
@@ -222,7 +240,6 @@ const finalImages = folder ? autoImages : images;
   max-height: 92%;
 }
 
-/* CLOSE FEEL */
 .lightbox:hover {
   cursor: zoom-out;
 }
